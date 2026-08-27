@@ -7,6 +7,8 @@
 
 #endif //GAMBIT_BOARD_H
 
+#pragma once
+
 class Board {
 public:
     Board();

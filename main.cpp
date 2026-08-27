@@ -4,4 +4,5 @@
 int main() {
     Board board;
     std::cout << "Gambit Chess Engine" << std::endl;
+    return 0;
 }
