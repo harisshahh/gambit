@@ -1,8 +1,10 @@
-//
-// Created by shahh on 8/26/2026.
-//
-
 #include "Board.h"
-Board::Board() {
 
+Board::Board() {
+    whitePawns = 0xFFFFFULL;
 }
+bool Board::hasWhitePawn(Square square) const {
+    return whitePawns & (1ULL << static_cast<int>(square));
+}
+
+
