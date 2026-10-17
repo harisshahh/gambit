@@ -32,6 +32,14 @@ class Board {
 public:
     Board();
 
+    Piece getPiece(Square square) const;
+    void print() const;
+
+    uint64_t whitePieces() const;
+    uint64_t blackPieces() const;
+    uint64_t occupied() const;
+    uint64_t emptySquares() const;
+
 
 private:
     uint64_t whitePawns;
