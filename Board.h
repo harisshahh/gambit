@@ -28,6 +28,11 @@ enum class Piece {
     BlackKing,
 };
 
+enum class Color {
+    White,
+    Black,
+};
+
 class Board {
 public:
     Board();
@@ -54,4 +59,15 @@ private:
     uint64_t blackRooks;
     uint64_t blackQueens;
     uint64_t blackKing;
+
+    Color currentSide;
+    bool whiteKingSideCastle;
+    bool whiteQueenSideCastle;
+    bool blackKingSideCastle;
+    bool blackQueenSideCastle;
+
+    int enPassant;
+    int halfmoveClock;
+    int fullmoveNumber;
+
 };

@@ -8,13 +8,23 @@ Board::Board() {
     whiteRooks = 0x0000000000000081ULL;
     whiteQueens = 0x0000000000000008ULL;
     whiteKing = 0x0000000000000010ULL;
-
     blackPawns = 0x00FF000000000000ULL;
     blackKnights = 0x4200000000000000ULL;
     blackBishops = 0x2400000000000000ULL;
     blackRooks = 0x8100000000000000ULL;
     blackQueens = 0x0800000000000000ULL;
     blackKing = 0x1000000000000000ULL;
+
+    currentSide = Color::White;
+    
+    whiteKingSideCastle = true;
+    whiteQueenSideCastle = true;
+    blackKingSideCastle = true;
+    blackQueenSideCastle = true;
+
+    enPassant = -1;
+    halfmoveClock = 0;
+    fullmoveNumber = 1;
 }
 Piece Board::getPiece(Square square) const {
     uint64_t bit = 1ULL << static_cast<int>(square);
