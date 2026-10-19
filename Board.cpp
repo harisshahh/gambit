@@ -1,5 +1,7 @@
 #include "Board.h"
 #include <iostream>
+#include <sstream>
+#include<string>
 
 Board::Board() {
     whitePawns = 0x00000000000000FF00ULL;
@@ -16,7 +18,7 @@ Board::Board() {
     blackKing = 0x1000000000000000ULL;
 
     currentSide = Color::White;
-    
+
     whiteKingSideCastle = true;
     whiteQueenSideCastle = true;
     blackKingSideCastle = true;
@@ -86,5 +88,64 @@ uint64_t Board::occupied() const {
 }
 uint64_t Board::emptySquares() const {
     return ~occupied();
+}
+bool Board::loadFEN(const std::string& fen) {
+    std::istringstream input(fen);
+    std::string piecePlacement;
+    std::string activeColor;
+    std::string castling;
+    std::string enPassant;
+
+    if (!(input >> piecePlacement >> activeColor >> castling >> enPassant >> halfmoveClock >> fullmoveNumber)) {
+        return false;
+    }
+
+    whitePawns = 0;
+    whiteKnights = 0;
+    whiteBishops = 0;
+    whiteRooks = 0;
+    whiteQueens = 0;
+    whiteKing = 0;
+    blackPawns = 0;
+    blackKnights = 0;
+    blackBishops = 0;
+    blackRooks = 0;
+    blackQueens = 0;
+    blackKing = 0;
+
+    int rank = 7;
+    int file = 0;
+
+    for (char symbol: piecePlacement) {
+        if (symbol == '/') {
+            --rank;
+            file = 0;
+            continue;
+        }
+        if (symbol >= '1' && symbol <= '8') {
+            file += symbol - '0';
+            continue;
+        }
+        Square square = static_cast<Square>(rank * 8 + file);
+        uint64_t bit = 1ULL << static_cast<int>(square);
+
+        switch (symbol) {
+            case 'P': whitePawns |= bit; break;
+            case 'N': whiteKnights |= bit; break;
+            case 'B': whiteBishops |= bit; break;
+            case 'R': whiteRooks |= bit; break;
+            case 'Q': whiteQueens |= bit; break;
+            case 'K': whiteKing |= bit; break;
+            case 'p': blackPawns |= bit; break;
+            case 'n': blackKnights |= bit; break;
+            case 'b': blackBishops |= bit; break;
+            case 'r': blackRooks |= bit; break;
+            case 'q': blackQueens |= bit; break;
+            case 'k': blackKing |= bit; break;
+            default: return false;
+        }
+        ++file;
+    }
+    
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <string>
 
 enum class Square {
     A1, B1, C1, D1, E1, F1, G1, H1,
@@ -39,6 +40,7 @@ public:
 
     Piece getPiece(Square square) const;
     void print() const;
+    bool loadFEN(const std::string& fen);
 
     uint64_t whitePieces() const;
     uint64_t blackPieces() const;
