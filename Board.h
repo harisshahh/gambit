@@ -68,7 +68,7 @@ private:
     bool blackKingSideCastle;
     bool blackQueenSideCastle;
 
-    int enPassant;
+    int enPassantTarget;
     int halfmoveClock;
     int fullmoveNumber;
 

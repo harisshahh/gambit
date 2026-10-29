@@ -4,15 +4,17 @@
 
 int main() {
     Board board;
+
+    std::string startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    bool loaded = board.loadFEN(startFEN);
+
+    std::cout << "FEN loaded: " << loaded << '\n';
     board.print();
-    uint64_t e2 = 1ULL << static_cast<int>(Square::E2);
-    uint64_t e7 = 1ULL << static_cast<int>(Square::E7);
-    uint64_t e4 = 1ULL << static_cast<int>(Square::E4);
 
-    std::cout << "white occupies E2: " << ((board.whitePieces() & e2) != 0) << '\n';
-    std::cout << "black occupies E7: " << ((board.blackPieces() & e7) != 0) << '\n';
-    std::cout << "occupied E4: " << ((board.occupied() & e4) != 0) << '\n';
-    std::cout << "empty E4: " << ((board.emptySquares() & e4) != 0) << '\n';
+    std::string customFEN = "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2";
+    loaded = board.loadFEN(customFEN);
 
+    std::cout << "\nCustom FEN loaded: " << loaded << '\n';
+    board.print();
     return 0;
 }

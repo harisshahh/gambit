@@ -24,7 +24,7 @@ Board::Board() {
     blackKingSideCastle = true;
     blackQueenSideCastle = true;
 
-    enPassant = -1;
+    enPassantTarget = -1;
     halfmoveClock = 0;
     fullmoveNumber = 1;
 }
@@ -146,6 +146,20 @@ bool Board::loadFEN(const std::string& fen) {
         }
         ++file;
     }
-    
+    currentSide = (activeColor == "w") ? Color::White : Color::Black;
+
+    whiteKingSideCastle = castling.find('K') != std::string::npos;
+    whiteQueenSideCastle = castling.find('Q') != std::string::npos;
+    blackKingSideCastle = castling.find('k') != std::string::npos;
+    blackQueenSideCastle = castling.find('q') != std::string::npos;
+
+    if (enPassant == "-") {
+        enPassantTarget = -1;
+    } else {
+        int epFile = enPassant[0] - 'a';
+        int epRank = enPassant[1] - '1';
+        enPassantTarget = epRank * 8 + epFile;
+    }
+    return true;
 }
 
