@@ -47,6 +47,13 @@ public:
     uint64_t occupied() const;
     uint64_t emptySquares() const;
 
+    Color sideToMove() const;
+    bool canCastleKingSide(Color color) const;
+    bool canCastleQueenSide(Color color) const;
+    int getEnPassantTarget() const;
+    int getHalfmoveClock() const;
+    int getFullmoveNumber() const;
+
 
 private:
     uint64_t whitePawns;
