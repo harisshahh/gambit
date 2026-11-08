@@ -2,6 +2,9 @@
 #include <cstdint>
 #include <string>
 
+struct Move;
+struct UndoState;
+
 enum class Square {
     A1, B1, C1, D1, E1, F1, G1, H1,
     A2, B2, C2, D2, E2, F2, G2, H2,
@@ -54,6 +57,9 @@ public:
     int getHalfmoveClock() const;
     int getFullmoveNumber() const;
 
+    bool makeMove(const Move& move, UndoState& undoState);
+    void undoMove(const Move& move, const UndoState& undoState);
+
 
 private:
     uint64_t whitePawns;
@@ -79,4 +85,6 @@ private:
     int halfmoveClock;
     int fullmoveNumber;
 
+    void removePiece(Piece piece, Square square);
+    void addPiece(Piece piece, Square square);
 };

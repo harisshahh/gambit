@@ -29,3 +29,18 @@ struct Move {
     MoveFlag flags;
     Piece promotionPiece;
 };
+
+struct UndoState {
+    uint8_t capturedSquare;
+    Piece capturedPiece;
+    Color sideToMove;
+
+    bool whiteKingSideCastle;
+    bool whiteQueenSideCastle;
+    bool blackKingSideCastle;
+    bool blackQueenSideCastle;
+    
+    int enPassantTarget;
+    int halfmoveClock;
+    int fullmoveNumber;
+};
